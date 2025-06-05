@@ -1,0 +1,840 @@
+/* Basic CSS for the landing page - Modern Classic Elegant Theme */
+
+:root {
+    --color-primary: #0D4715; /* Dark Green */
+    --color-secondary: #41644A; /* Medium Green */
+    --color-accent: #E9762B; /* Orange */
+    --color-background: #F1F0E9; /* Light Beige */
+    --color-text: #333; /* Dark Gray for general text */
+    --color-light-gray: #e0e0e0; /* For borders and subtle lines */
+}
+
+body {
+    font-family: 'Roboto', sans-serif; /* Changed font to Roboto for a modern classic feel */
+    line-height: 1.6;
+    color: var(--color-text);
+    background-color: var(--color-background);
+    margin: 0;
+    padding-top: 90px; /* Increased padding for fixed navbar */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 0; /* Increased vertical padding for sections */
+}
+
+/* General Section Styling */
+section {
+    padding: 80px 0; /* Increased section padding */
+}
+
+section:nth-child(odd) {
+    background-color: #fff;
+}
+
+section:nth-child(even) {
+    background-color: var(--color-background);
+}
+
+section h1, section h2 {
+    text-align: center;
+    color: var(--color-primary); /* Dark Green for titles */
+    margin-bottom: 15px;
+    font-weight: 700; /* Bold font weight for titles */
+}
+
+section h1 {
+    font-size: 2.8em; /* Adjusted title size */
+}
+
+section h2 {
+     font-size: 2.2em; /* Adjusted title size */
+}
+
+section h1 span,
+section .title span {
+    color: var(--color-accent); /* Orange for highlighted parts */
+}
+
+section .title {
+    font-size: 2.2em; /* Styled title class */
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+section .subtitle {
+    text-align: center;
+    font-size: 1.1em;
+    color: #555; /* Slightly lighter text for subtitles */
+    margin-bottom: 60px; /* Increased space below subtitle */
+    max-width: 800px; /* Limit subtitle width */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tagline {
+    text-align: center;
+    color: var(--color-accent); /* Orange for taglines */
+    font-weight: 600; /* Semi-bold */
+    margin-bottom: 10px;
+    text-transform: uppercase; /* Uppercase for tagline */
+    letter-spacing: 1px;
+}
+
+/* Navbar Styling */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px; /* Reduced padding */
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); /* Softer and smaller shadow */
+    z-index: 1000;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    font-size: 1.8em; /* Slightly smaller brand text */
+    font-weight: 700;
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.navbar-brand img {
+    margin-right: 8px; /* Reduced margin */
+    height: 30px; /* Slightly smaller logo */
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Reduced space between nav links and utility icons */
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px; /* Reduced space between links */
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 500;
+    transition: color 0.3s ease;
+    font-size: 1em; /* Slightly smaller font size */
+    position: relative;
+}
+
+.nav-links li a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px; /* Adjusted position below text */
+    width: 0;
+    height: 2px;
+    background-color: var(--color-primary);
+    transition: width 0.3s ease;
+}
+
+h1 {
+    text-align: left;
+  }
+
+.nav-links li a:hover::after {
+    width: 100%;
+}
+
+.nav-utilities {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Reduced space between utility icons and button */
+    margin-left: auto; /* Pushes utilities to the far right */
+}
+
+.nav-utilities svg {
+    width: 20px; /* Slightly smaller icons */
+    height: 20px;
+    stroke: var(--color-text);
+    cursor: pointer;
+    transition: stroke 0.3s ease;
+}
+
+.nav-utilities svg:hover {
+     stroke: var(--color-primary);
+}
+
+.nav-utilities .btn {
+    background-color: var(--color-accent);
+    color: #fff;
+    padding: 6px 12px; /* Further reduced padding */
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    font-size: 0.8em; /* Further reduced font size */
+}
+
+.nav-utilities .btn-compact {
+    background-color: var(--color-accent);
+    color: #fff;
+    padding: 4px 8px; /* Even more reduced padding for compact button */
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    font-size: 0.7em; /* Even smaller font size */
+    line-height: 1.1; /* Tighter line height */
+}
+
+.nav-utilities .btn-compact:hover {
+     background-color: #d46a26;
+}
+
+.nav-utilities .btn span {
+    display: block;
+    line-height: 1.2;
+}
+
+/* Hero Section Styling */
+.hero-bg {
+    background-image: url('https://i.pinimg.com/736x/8d/cb/6d/8dcb6d6e74f2a0da9de97e28991d06b1.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    padding: 120px 0; /* Adjusted padding */
+    position: relative;
+    overflow: hidden; /* Ensure nothing spills out */
+}
+
+.hero-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.hero-bg .container {
+    position: relative;
+    z-index: 1;
+    text-align: left; /* Ensure text is left aligned - already set */
+    padding-top: 0;
+    padding-bottom: 0;
+    width: 90%; /* Maintain width */
+    max-width: 1200px; /* Maintain max-width */
+    margin: 0; /* Remove auto margins to prevent centering */
+    padding-left: 40px; /* Add left padding to position from the edge */
+    /* On smaller screens, the general container padding will take over */
+}
+
+.hero-bg h1 {
+    font-size: 4em;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.hero-bg h3 {
+    font-size: 1.2em; /* Slightly smaller sub-heading */
+    margin-bottom: 8px; /* Reduced margin */
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
+}
+
+.hero-bg p {
+    font-size: 1.1em; /* Slightly smaller paragraph */
+    margin-bottom: 25px; /* Reduced margin */
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 600px; /* Slightly narrower paragraph width */
+}
+
+.hero-bg .btn {
+     background-color: var(--color-accent);
+    color: #fff;
+    padding: 10px 20px; /* Reduced padding */
+    border-radius: 4px; /* Slightly less rounded */
+    text-decoration: none;
+    font-weight: 600;
+     transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+.hero-bg .btn:hover {
+     background-color: #d46a26;
+}
+
+.hero-stats {
+    position: absolute;
+    bottom: 30px; /* Adjusted position */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 15px 30px; /* Adjusted padding */
+    border-radius: 8px; /* Slightly less rounded */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    color: var(--color-text);
+    gap: 30px; /* Adjusted space between stats */
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-item h2 {
+    font-size: 1.6em; /* Slightly smaller numbers */
+    color: var(--color-primary);
+    margin-bottom: 4px; /* Reduced margin */
+    font-weight: 700;
+}
+
+.stat-item p {
+    font-size: 0.9em; /* Slightly smaller text */
+    margin: 0;
+    color: #555;
+}
+
+/* Card Styling (Used in Features, Community, Testimonials) */
+.card {
+    background-color: #fff;
+    border-radius: 8px; /* Slightly less rounded corners */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08); /* Softer shadow */
+    padding: 30px; /* Increased padding */
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--color-light-gray); /* Subtle border */
+}
+
+.card:hover {
+    transform: translateY(-8px); /* More pronounced hover effect */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-icon {
+    font-size: 2.5em; /* Larger icons */
+    margin-bottom: 20px;
+    color: var(--color-primary); /* Dark Green icons */
+}
+
+.card h3 {
+    color: var(--color-primary); /* Dark Green */
+    margin-bottom: 10px;
+    font-weight: 600; /* Semi-bold */
+    font-size: 1.3em;
+}
+
+.card p {
+    font-size: 1em;
+    color: #555;
+}
+
+/* Features Section */
+.features {
+    display: grid; /* Using grid for more control */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+    gap: 30px; /* Space between grid items */
+    margin-top: 40px;
+}
+
+.features .card h3 {
+    color: var(--color-primary); /* Dark Green for card titles */
+    margin-bottom: 10px;
+    font-weight: 600; /* Semi-bold */
+    font-size: 1.3em;
+    text-align: center; /* Centering the heading text */
+}
+
+/* Community Section */
+.card-group {
+    display: grid; /* Using grid */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.card-group .card button {
+     background-color: var(--color-primary); /* Dark Green button */
+    color: #fff;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+     transition: background-color 0.3s ease;
+    font-size: 1em;
+    margin-top: 20px; /* Space above button */
+}
+
+.card-group .card button:hover {
+     background-color: #0b3a12; /* Darker green */
+}
+
+/* Learning Section */
+#learning ul {
+    list-style: none;
+    padding: 0;
+    max-width: 700px; /* Wider list */
+    margin: 40px auto;
+}
+
+#learning li {
+    background-color: #fff;
+    margin-bottom: 20px; /* More space between items */
+    padding: 20px; /* Increased padding */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Softer shadow */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--color-text);
+     transition: transform 0.3s ease;
+     border: 1px solid var(--color-light-gray); /* Subtle border */
+     font-size: 1.1em;
+     font-weight: 500;
+}
+
+#learning li:hover {
+    transform: translateX(10px); /* More pronounced slide effect */
+}
+
+#learning li i.arrow {
+    font-size: 1.4em; /* Larger arrow */
+    color: var(--color-accent); /* Orange arrows */
+}
+
+/* Recommendation Section */
+#recommendation .container {
+    text-align: center;
+}
+
+#recommendation h3 {
+    color: var(--color-secondary); /* Medium Green */
+    margin-bottom: 15px;
+    font-size: 1.8em; /* Larger subheading */
+    font-weight: 600;
+}
+
+#recommendation p {
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 40px; /* More space below paragraph */
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#recommendation .btn,
+#recommendation .btn-secondary {
+     font-size: 1.1em;
+     padding: 14px 30px; /* Increased padding */
+     border-radius: 5px;
+     text-decoration: none;
+     font-weight: 600;
+     margin: 0 10px;
+     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+     display: inline-block; /* Ensure buttons are inline-block */
+}
+
+#recommendation .btn {
+     background-color: var(--color-primary); /* Dark Green */
+    color: #fff;
+    border: 2px solid var(--color-primary); /* Added border for consistency */
+}
+
+#recommendation .btn:hover {
+     background-color: #0b3a12; /* Darker green */
+     border-color: #0b3a12;
+}
+
+#recommendation .btn-secondary {
+     background-color: transparent;
+    color: var(--color-primary); /* Dark Green text */
+    border: 2px solid var(--color-primary); /* Dark Green border */
+}
+
+#recommendation .btn-secondary:hover {
+    background-color: var(--color-primary); /* Dark Green background */
+    color: #fff; /* White text */
+}
+
+/* Testimonials Section */
+.testimonials {
+    display: grid; /* Using grid */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.testimonials .card {
+    text-align: left; /* Left align testimonial text */
+}
+
+.testimonials .card p {
+    font-style: italic;
+    color: #555;
+    margin-bottom: 20px;
+    font-size: 1.1em; /* Slightly larger testimonial text */
+}
+
+.testimonials .profile {
+    display: flex;
+    align-items: center;
+    margin-top: 20px; /* Space above profile */
+}
+
+.testimonials .profile img {
+    width: 60px; /* Larger profile image */
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+    border: 2px solid var(--color-primary); /* Dark Green border */
+}
+
+.testimonials .profile-text strong {
+    display: block;
+    color: var(--color-primary); /* Dark Green */
+    font-size: 1.2em; /* Larger name */
+    font-weight: 600;
+}
+
+.testimonials .profile-text span {
+    font-size: 1em;
+    color: #777; /* Lighter text for location */
+}
+
+/* Join Us Section */
+#join-us .container {
+    text-align: center;
+}
+
+#join-us h2 {
+    color: var(--color-primary); /* Dark Green */
+    margin-bottom: 20px; /* More space */
+    font-size: 2.5em; /* Larger heading */
+}
+
+#join-us p {
+     font-size: 1.2em; /* Larger paragraph */
+    color: #555;
+    margin-bottom: 40px;
+     max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#join-us .btn,
+#join-us .btn-secondary {
+     font-size: 1.1em;
+     padding: 14px 30px;
+     border-radius: 5px;
+     text-decoration: none;
+     font-weight: 600;
+     margin: 0 10px;
+     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+     display: inline-block;
+}
+
+#join-us .btn {
+     background-color: var(--color-primary); /* Dark Green */
+    color: #fff;
+    border: 2px solid var(--color-primary);
+}
+
+#join-us .btn:hover {
+    background-color: #0b3a12; /* Darker green */
+    border-color: #0b3a12;
+}
+
+#join-us .btn-secondary {
+     background-color: transparent;
+    color: var(--color-primary); /* Dark Green text */
+    border: 2px solid var(--color-primary); /* Dark Green border */
+}
+
+#join-us .btn-secondary:hover {
+    background-color: var(--color-primary); /* Dark Green background */
+    color: #fff; /* White text */
+}
+
+/* Footer Styling */
+footer {
+    background-color: var(--color-primary); /* Dark Green */
+    color: #fff;
+    text-align: center;
+    padding: 30px 0; /* Increased padding */
+    margin-top: 0; /* Removed margin to connect with Join Us section */
+    font-size: 1em; /* Adjusted font size */
+}
+
+footer p {
+    margin: 0;
+}
+
+/* --- News Section --- */
+#news .news-list {
+    display: grid; /* Use grid for layout */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 30px; /* Space between news items */
+    margin-top: 40px;
+}
+
+#news .news-item {
+    /* Inherits .card styling for basic appearance */
+    text-align: left; /* Align text to the left within the news item card */
+    padding: 0; /* Remove padding as content will have its own */
+    overflow: hidden; /* Hide overflowing parts of the image */
+}
+
+#news .news-item img {
+    width: 100%; /* Make image take full width of the card */
+    height: 200px; /* Fixed height for images */
+    object-fit: cover; /* Cover the area without distortion */
+    display: block; /* Remove extra space below image */
+    margin-bottom: 15px; /* Space below image */
+}
+
+#news .news-item .news-content {
+    padding: 0 20px 20px; /* Padding for the content area */
+}
+
+#news .news-item h3 {
+    color: var(--color-primary); /* Dark Green for title */
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 1.2em; /* Slightly smaller title */
+    text-align: left; /* Ensure title is left aligned */
+}
+
+#news .news-item p {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+#news .news-item .read-more {
+    display: inline-block; /* Make it a block for padding */
+    color: var(--color-accent); /* Orange color for link */
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+#news .news-item .read-more:hover {
+    color: var(--color-primary); /* Green on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 10px 15px; /* Adjusted padding for mobile */
+    }
+
+    .navbar-brand {
+        font-size: 1.6em; /* Adjusted size for mobile */
+    }
+
+     .navbar-brand img {
+        height: 25px;
+    }
+
+    .nav-right {
+        gap: 15px; /* Adjusted gap for mobile */
+    }
+
+    .nav-links {
+        gap: 10px; /* Adjusted gap for mobile */
+    }
+
+    .nav-links li a {
+        font-size: 0.9em; /* Adjusted font size for mobile */
+    }
+
+    .nav-utilities {
+        gap: 10px; /* Adjusted gap for mobile */
+        margin-left: 15px;
+    }
+
+     .nav-utilities svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .nav-utilities .btn {
+        padding: 6px 12px; /* Adjusted padding for mobile */
+        font-size: 0.8em;
+    }
+
+    .hero-bg {
+        padding: 80px 0;
+    }
+
+    .hero-bg h1 {
+        font-size: 2.5em;
+    }
+
+    .hero-bg h3 {
+        font-size: 1em;
+    }
+
+    .hero-bg p {
+        font-size: 0.9em;
+    }
+
+    .hero-stats {
+        padding: 15px 20px;
+        gap: 15px;
+    }
+
+    .stat-item h2 {
+        font-size: 1.4em;
+    }
+
+    .stat-item p {
+        font-size: 0.8em;
+    }
+
+    .features, .card-group, .testimonials {
+        gap: 15px; /* Adjusted gap for mobile */
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .card-icon {
+        font-size: 1.8em;
+        margin-bottom: 15px;
+    }
+
+    .card h3 {
+        font-size: 1.1em;
+    }
+
+    #learning ul {
+        margin: 20px auto;
+    }
+
+    #learning li {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+
+    #learning li i.arrow {
+        font-size: 1.2em;
+    }
+
+     #recommendation .btn,
+    #recommendation .btn-secondary,
+    #join-us .btn,
+    #join-us .btn-secondary {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+
+    #recommendation h3 {
+        font-size: 1.4em;
+    }
+
+    #join-us h2 {
+        font-size: 1.8em;
+    }
+
+     footer {
+        padding: 20px 0;
+        margin-top: 40px;
+    }
+
+    #news .news-list {
+        gap: 20px; /* Adjusted gap for mobile */
+    }
+
+    #news .news-item img {
+        height: 180px; /* Adjusted image height for mobile */
+    }
+
+    #news .news-item .news-content {
+        padding: 0 15px 15px; /* Adjusted padding for mobile */
+    }
+
+     #news .news-item h3 {
+        font-size: 1.1em;
+    }
+
+     #news .news-item p {
+        font-size: 0.9em;
+    }
+
+     #news .news-item .read-more {
+        font-size: 0.9em;
+    }
+}
+
+/* Styling for the new search box */
+.search-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--color-light-gray); /* Subtle border */
+    border-radius: 4px;
+    padding: 4px 8px; /* Padding around the input and icon */
+    background-color: #fff; /* White background */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-box:focus-within {
+    border-color: var(--color-primary); /* Highlight border on focus */
+    box-shadow: 0 0 0 2px rgba(13, 71, 21, 0.1); /* Subtle glow */
+}
+
+.search-input {
+    border: none;
+    outline: none; /* Remove default outline */
+    padding: 0 5px; /* Padding inside the input */
+    font-size: 0.9em;
+    color: var(--color-text);
+    width: 120px; /* Default width */
+    transition: width 0.3s ease;
+    background-color: transparent; /* Transparent background */
+}
+
+.search-input::placeholder {
+    color: #888; /* Placeholder text color */
+}
+
+/* Optional: Expand input width on focus */
+.search-box:focus-within .search-input {
+    width: 150px; /* Wider on focus */
+}
+
+.search-icon {
+    display: flex; /* Use flex to center SVG */
+    align-items: center;
+    color: var(--color-text); /* Icon color */
+    cursor: pointer;
+}
+
+.search-icon svg {
+     width: 18px; /* Adjusted size */
+    height: 18px;
+    stroke: var(--color-text); /* Match icon color */
+    transition: stroke 0.3s ease;
+}
+
+.search-icon:hover svg {
+    stroke: var(--color-primary); /* Green on hover */
+} 
