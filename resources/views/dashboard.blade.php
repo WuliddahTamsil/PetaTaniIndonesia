@@ -106,10 +106,10 @@
                 <!-- Search Section -->
                 <div>
                     <h2 class="text-lg font-semibold mb-2">Commodity Search</h2>
-                    <div class="space-y-3">
+                    <form action="{{ route('dashboard') }}" method="GET" class="space-y-3">
                         <div>
                             <label class="block text-sm mb-1">Commodity</label>
-                            <input type="text" id="commodityInput" list="commodityList" class="w-full p-2 rounded text-gray-800" placeholder="Type or select commodity">
+                            <input type="text" name="commodity" id="commodityInput" list="commodityList" class="w-full p-2 rounded text-gray-800" placeholder="Type or select commodity" value="{{ request('commodity') }}">
                             <datalist id="commodityList">
                                 <option value="Jagung">
                                 <option value="Padi">
@@ -124,7 +124,7 @@
                         </div>
                         <div>
                             <label class="block text-sm mb-1">City/Region</label>
-                            <input type="text" id="regionInput" list="regionList" class="w-full p-2 rounded text-gray-800" placeholder="Type or select region">
+                            <input type="text" name="region" id="regionInput" list="regionList" class="w-full p-2 rounded text-gray-800" placeholder="Type or select region" value="{{ request('region') }}">
                             <datalist id="regionList">
                                 <option value="Bogor">
                                 <option value="Bandung">
@@ -137,13 +137,15 @@
                                 <option value="Denpasar">
                             </datalist>
                         </div>
-                        <button id="searchBtn" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded">
+                        <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded">
                             Search
                         </button>
-                        <button id="resetBtn" class="w-full bg-gray-600 hover:bg-gray-700 text-white py-2 rounded">
+                        <a href="{{ route('dashboard') }}" class="block w-full">
+                            <button type="button" class="w-full bg-gray-600 hover:bg-gray-700 text-white py-2 rounded">
                             Reset
                         </button>
-                    </div>
+                        </a>
+                    </form>
                 </div>
                 
                 <!-- Commodity Chart -->
@@ -244,259 +246,36 @@
                 <!-- Summary Cards -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                     <div class="bg-white rounded-lg shadow p-4">
-                        <h3 class="text-lg font-semibold text-gray-700">Total Commodities</h3>
-                        <p class="text-2xl font-bold text-green-600" id="totalCommodities">0</p>
+                        <h3 class="text-lg font-semibold text-gray-700">Total Komoditas</h3>
+                        <p class="text-2xl font-bold text-green-600">{{ $totalCommodities }}</p>
                     </div>
                     <div class="bg-white rounded-lg shadow p-4">
-                        <h3 class="text-lg font-semibold text-gray-700">Active Regions</h3>
-                        <p class="text-2xl font-bold text-blue-600" id="activeRegions">0</p>
+                        <h3 class="text-lg font-semibold text-gray-700">Total Daerah</h3>
+                        <p class="text-2xl font-bold text-green-600">{{ $totalRegions }}</p>
                     </div>
                     <div class="bg-white rounded-lg shadow p-4">
-                        <h3 class="text-lg font-semibold text-gray-700">Average Price</h3>
-                        <p class="text-2xl font-bold text-purple-600" id="averagePrice">Rp 0</p>
+                        <h3 class="text-lg font-semibold text-gray-700">Total Produksi (Ton)</h3>
+                        <p class="text-2xl font-bold text-green-600">{{ number_format($totalProduction, 2) }}</p>
                     </div>
                 </div>
 
-                <!-- Search Bar -->
-                <div class="row mb-4">
-                    <div class="col-md-8 mx-auto">
-                        <form action="{{ route('marketplace.index') }}" method="GET" class="d-flex">
-                            <div class="input-group">
-                                <input type="text" name="search" class="form-control" placeholder="Cari komoditas..." value="{{ request('search') }}">
-                                <select name="category" class="form-select" style="max-width: 200px;">
-                                    <option value="">Semua Kategori</option>
-                                    <option value="1" {{ request('category') == '1' ? 'selected' : '' }}>Sayuran</option>
-                                    <option value="2" {{ request('category') == '2' ? 'selected' : '' }}>Buah-buahan</option>
-                                    <option value="3" {{ request('category') == '3' ? 'selected' : '' }}>Beras</option>
-                                    <option value="4" {{ request('category') == '4' ? 'selected' : '' }}>Biji-bijian</option>
-                                    <option value="5" {{ request('category') == '5' ? 'selected' : '' }}>Rempah-rempah & Kopi</option>
-                                </select>
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fas fa-search"></i> Cari
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- Commodity Cards -->
-                <div class="row">
-                    <!-- Beras Card -->
-                    <div class="col-md-4 mb-4">
-                        <a href="{{ route('marketplace.index', ['category' => 3]) }}" class="text-decoration-none">
-                            <div class="card h-100 border-0 shadow-sm hover-card">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h5 class="card-title mb-0 text-dark">Beras</h5>
-                                        <i class="fas fa-wheat-awn text-warning fa-2x"></i>
-                                    </div>
-                                    <p class="card-text text-muted">Harga rata-rata: Rp 12.500/kg</p>
-                                    <div class="d-flex align-items-center">
-                                        <span class="badge bg-success me-2">
-                                            <i class="fas fa-arrow-up"></i> 5.2%
-                                        </span>
-                                        <small class="text-muted">Trend mingguan</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- Sayuran Card -->
-                    <div class="col-md-4 mb-4">
-                        <a href="{{ route('marketplace.index', ['category' => 1]) }}" class="text-decoration-none">
-                            <div class="card h-100 border-0 shadow-sm hover-card">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h5 class="card-title mb-0 text-dark">Sayuran</h5>
-                                        <i class="fas fa-carrot text-success fa-2x"></i>
-                                    </div>
-                                    <p class="card-text text-muted">Harga rata-rata: Rp 8.750/kg</p>
-                                    <div class="d-flex align-items-center">
-                                        <span class="badge bg-danger me-2">
-                                            <i class="fas fa-arrow-down"></i> 2.1%
-                                        </span>
-                                        <small class="text-muted">Trend mingguan</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- Buah-buahan Card -->
-                    <div class="col-md-4 mb-4">
-                        <a href="{{ route('marketplace.index', ['category' => 2]) }}" class="text-decoration-none">
-                            <div class="card h-100 border-0 shadow-sm hover-card">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h5 class="card-title mb-0 text-dark">Buah-buahan</h5>
-                                        <i class="fas fa-apple-whole text-danger fa-2x"></i>
-                                    </div>
-                                    <p class="card-text text-muted">Harga rata-rata: Rp 15.200/kg</p>
-                                    <div class="d-flex align-items-center">
-                                        <span class="badge bg-success me-2">
-                                            <i class="fas fa-arrow-up"></i> 3.8%
-                                        </span>
-                                        <small class="text-muted">Trend mingguan</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- Biji-bijian Card -->
-                    <div class="col-md-4 mb-4">
-                        <a href="{{ route('marketplace.index', ['category' => 4]) }}" class="text-decoration-none">
-                            <div class="card h-100 border-0 shadow-sm hover-card">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h5 class="card-title mb-0 text-dark">Biji-bijian</h5>
-                                        <i class="fas fa-seedling text-info fa-2x"></i>
-                                    </div>
-                                    <p class="card-text text-muted">Harga rata-rata: Rp 18.500/kg</p>
-                                    <div class="d-flex align-items-center">
-                                        <span class="badge bg-success me-2">
-                                            <i class="fas fa-arrow-up"></i> 4.5%
-                                        </span>
-                                        <small class="text-muted">Trend mingguan</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- Rempah-rempah Card -->
-                    <div class="col-md-4 mb-4">
-                        <a href="{{ route('marketplace.index', ['category' => 5]) }}" class="text-decoration-none">
-                            <div class="card h-100 border-0 shadow-sm hover-card">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h5 class="card-title mb-0 text-dark">Rempah-rempah</h5>
-                                        <i class="fas fa-pepper-hot text-danger fa-2x"></i>
-                                    </div>
-                                    <p class="card-text text-muted">Harga rata-rata: Rp 85.000/kg</p>
-                                    <div class="d-flex align-items-center">
-                                        <span class="badge bg-success me-2">
-                                            <i class="fas fa-arrow-up"></i> 6.2%
-                                        </span>
-                                        <small class="text-muted">Trend mingguan</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- Kopi Card -->
-                    <div class="col-md-4 mb-4">
-                        <a href="{{ route('marketplace.index', ['category' => 5]) }}" class="text-decoration-none">
-                            <div class="card h-100 border-0 shadow-sm hover-card">
-                                <div class="card-body">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h5 class="card-title mb-0 text-dark">Kopi</h5>
-                                        <i class="fas fa-mug-hot text-dark fa-2x"></i>
-                                    </div>
-                                    <p class="card-text text-muted">Harga rata-rata: Rp 95.000/kg</p>
-                                    <div class="d-flex align-items-center">
-                                        <span class="badge bg-success me-2">
-                                            <i class="fas fa-arrow-up"></i> 7.5%
-                                        </span>
-                                        <small class="text-muted">Trend mingguan</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Data Table Section -->
+                <!-- Map -->
                 <div class="bg-white rounded-lg shadow mb-6">
-                    <div class="p-4 border-b">
-                        <h3 class="text-lg font-semibold">Commodity Data</h3>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-50">
-                                <tr>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Commodity</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Region</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price (Rp)</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Production (Ton)</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Area (Ha)</th>
-                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Last Updated</th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-200" id="commodityTableBody">
-                                <!-- Data will be populated by JavaScript -->
-                            </tbody>
-                        </table>
-                    </div>
+                    <div id="map" class="w-full h-[500px] rounded-lg"></div>
                 </div>
 
-                <!-- WebGIS Map Section -->
-                <div class="mb-8">
+                <!-- Commodity Chart -->
                     <div class="bg-white rounded-lg shadow p-4">
-                        <div class="flex flex-wrap justify-between items-center mb-4 gap-2">
-                            <h3 class="text-lg font-semibold">Farm Map & Commodity Tracker</h3>
-                            <div class="flex flex-wrap gap-2">
-                                <button id="locateMeBtn" class="px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 flex items-center text-sm">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
-                                    </svg>
-                                    Locate Me
-                                </button>
-                                <button id="fullscreenBtn" class="px-3 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 flex items-center text-sm">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 01-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12zm-9 7a1 1 0 012 0v1.586l2.293-2.293a1 1 0 111.414 1.414L6.414 15H8a1 1 0 010 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 010-2h1.586l-2.293-2.293a1 1 0 111.414-1.414L15 13.586V12a1 1 0 011-1z" clip-rule="evenodd" />
-                                    </svg>
-                                    Fullscreen
-                                </button>
+                    <h2 class="text-lg font-semibold mb-2">Tren Komoditas</h2>
+                    <div class="mb-3">
+                        <select id="chartType" class="w-full p-2 rounded text-gray-800 text-sm border border-gray-300">
+                            <option value="price">Tren Harga</option>
+                            <option value="production">Tren Produksi</option>
+                            <option value="area">Tren Luas Lahan</option>
+                        </select>
                             </div>
-                        </div>
-                        
-                        <!-- Commodity Legend -->
-                        <div class="mb-4 p-3 bg-gray-50 rounded-lg">
-                            <h4 class="text-sm font-semibold mb-2">Commodity Legend</h4>
-                            <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
-                                <div class="flex items-center">
-                                    <div class="w-4 h-4 rounded-full mr-2" style="background-color: #FFD700; border: 1px solid #000;"></div>
-                                    <span class="text-sm">Jagung</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <div class="w-4 h-4 rounded-full mr-2" style="background-color: #FF4500; border: 1px solid #000;"></div>
-                                    <span class="text-sm">Padi</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <div class="w-4 h-4 rounded-full mr-2" style="background-color: #32CD32; border: 1px solid #000;"></div>
-                                    <span class="text-sm">Kedelai</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <div class="w-4 h-4 rounded-full mr-2" style="background-color: #FF69B4; border: 1px solid #000;"></div>
-                                    <span class="text-sm">Gandum</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <div class="w-4 h-4 rounded-full mr-2" style="background-color: #8B4513; border: 1px solid #000;"></div>
-                                    <span class="text-sm">Kopi</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <div class="w-4 h-4 rounded-full mr-2" style="background-color: #00CED1; border: 1px solid #000;"></div>
-                                    <span class="text-sm">Teh</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <div class="w-4 h-4 rounded-full mr-2" style="background-color: #9932CC; border: 1px solid #000;"></div>
-                                    <span class="text-sm">Tembakau</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <div class="w-4 h-4 rounded-full mr-2" style="background-color: #1E90FF; border: 1px solid #000;"></div>
-                                    <span class="text-sm">Karet</span>
-                                </div>
-                                <div class="flex items-center">
-                                    <div class="w-4 h-4 rounded-full mr-2" style="background-color: #FFA500; border: 1px solid #000;"></div>
-                                    <span class="text-sm">Kelapa Sawit</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="map" class="rounded-lg border border-gray-200"></div>
+                    <div class="relative" style="height: 250px;">
+                        <canvas id="commodityChart"></canvas>
                     </div>
                 </div>
             </main>
@@ -1332,73 +1111,6 @@
         // Add chart type change event listener
         document.getElementById('chartType').addEventListener('change', function() {
             updateChart(filteredCommodityData);
-        });
-
-        // Add this to your existing JavaScript
-        document.addEventListener('DOMContentLoaded', function() {
-            // Fetch data from API
-            fetch('/api/commodity-data')
-                .then(response => response.json())
-                .then(data => {
-                    // Update summary cards
-                    document.getElementById('totalCommodities').textContent = data.commodities.length;
-                    document.getElementById('activeRegions').textContent = new Set(data.commodities.map(c => c.region)).size;
-                    const avgPrice = data.commodities.reduce((acc, curr) => acc + curr.price, 0) / data.commodities.length;
-                    document.getElementById('averagePrice').textContent = `Rp ${avgPrice.toLocaleString()}`;
-
-                    // Populate table
-                    const tableBody = document.getElementById('commodityTableBody');
-                    data.commodities.forEach(commodity => {
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${commodity.name}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${commodity.region}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Rp ${commodity.price.toLocaleString()}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${commodity.production.toLocaleString()}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${commodity.area.toLocaleString()}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">${commodity.lastUpdated}</td>
-                        `;
-                        tableBody.appendChild(row);
-                    });
-
-                    // Initialize commodity chart
-                    const ctx = document.getElementById('commodityChart').getContext('2d');
-                    const commodityChart = new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                            datasets: [{
-                                label: 'Price Trend',
-                                data: data.trends.price,
-                                borderColor: 'rgb(34, 197, 94)',
-                                tension: 0.1
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: {
-                                legend: {
-                                    position: 'top',
-                                }
-                            },
-                            scales: {
-                                y: {
-                                    beginAtZero: false
-                                }
-                            }
-                        }
-                    });
-
-                    // Update chart when type changes
-                    document.getElementById('chartType').addEventListener('change', function(e) {
-                        const type = e.target.value;
-                        commodityChart.data.datasets[0].data = data.trends[type];
-                        commodityChart.data.datasets[0].label = `${type.charAt(0).toUpperCase() + type.slice(1)} Trend`;
-                        commodityChart.update();
-                    });
-                })
-                .catch(error => console.error('Error fetching data:', error));
         });
     </script>
 </body>

@@ -76,9 +76,7 @@ Route::post('/logout', function (Request $request) {
 })->name('logout');
 
 // Placeholder route for the dashboard (you will need to create a real one)
-Route::get('/dashboard', function () {
-    return view('dashboard'); // Assuming you have a dashboard.blade.php view
-})->name('dashboard');
+Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
 // Add new route for commodity data
 Route::get('/api/commodity-data', function () {
